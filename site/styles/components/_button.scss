@@ -1,0 +1,18 @@
+//
+// Button
+//
+
+%button {
+  padding: 14px 42px;
+
+  @include font(15px, 800);
+
+  border-radius: $button-radius;
+  border: none;
+
+  color: $button-color;
+  background: $button-bg;
+
+  transition: all 0.2s ease-in-out;
+  @include hoverer('box-shadow', $button-shadow, $button--hover-shadow);
+}

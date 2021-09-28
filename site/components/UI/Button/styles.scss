@@ -1,0 +1,10 @@
+//
+// Button
+//
+
+@import "styles/styles";
+
+.#{$prefix}-button {
+  @extend %button;
+  @include hoverer('box-shadow', $button-shadow, $button--hover-shadow);
+}

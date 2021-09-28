@@ -1,0 +1,66 @@
+//
+// News Card
+//
+
+@import "styles/styles";
+
+$gup: 30px;
+
+$card-width: calc((100% - 30px - 30px) / 3);
+
+.news-card {
+  @include flex-col;
+
+  @include size(100%, 100%);
+  min-height: 200px;
+  @media (max-width: 767px) {
+    min-height: 230px;
+  }
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  overflow: hidden;
+
+  background-color: white;
+
+  padding: 30px 32px;
+
+  border-radius: 17px;
+}
+
+.news-card__header {
+  margin-bottom: auto;
+}
+
+.news-card__time {
+  @include font-size(10px);
+  @media (max-width: 767px) {
+    @include font-size(14px);
+  }
+}
+
+.news-card__title {
+  @include font-size(12px);
+  @media (max-width: 767px) {
+    @include font-size(14px);
+    margin-bottom: 30px;
+  }
+}
+
+.news-card__link {
+  position: relative;
+  @include font-size(14px);
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover::after {
+    opacity: 0;
+  }
+  &::after {
+    @include pseudo;
+    bottom: 0;
+    @include size(100%, 1px);
+    background-color: white;
+  }
+}

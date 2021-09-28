@@ -1,0 +1,25 @@
+//
+// Color
+//
+
+$color-diff_base: 20%;
+$color-diff_more: 33.5%;
+$color-diff_most: 37%;
+
+@function light($hex) {@return lighten($hex, $color-diff_base)}
+@function lighter($hex) {@return lighten($hex, $color-diff_more)}
+@function lightest($hex) {@return lighten($hex, $color-diff_most)}
+
+@function dark($hex) {@return darken($hex, $color-diff_base)}
+@function darker($hex) {@return darken($hex, $color-diff_more)}
+@function darkest($hex) {@return darken($hex, $color-diff_most)}
+
+@function tint($color, $percent: 15%) {@return mix(white, $color, $percent)}
+
+@function shade($color, $percent: 15%) {@return mix(black, $color, $percent)}
+
+@function HexToRGB($hex) {@return red($hex), green($hex), blue($hex)}
+
+@function color($name) {@return var(--#{$name})}
+@function color-rgb($name) {@return var(--#{$name}-rgb)}
+@function color-opacity($name, $alpha) {@return rgba(color-rgb($name), $alpha);}

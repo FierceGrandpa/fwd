@@ -1,0 +1,8 @@
+//
+// Unselectable
+//
+
+@mixin unselectable {
+  user-select: none;
+  -webkit-touch-callout: none;
+}

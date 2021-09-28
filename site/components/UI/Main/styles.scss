@@ -1,0 +1,12 @@
+//
+// Main
+//
+
+@import "styles/styles";
+
+.#{$prefix}-main {
+  flex: 1;
+  flex-direction: column;
+  @include flex-center;
+  @include size(100%);
+}

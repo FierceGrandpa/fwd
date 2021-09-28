@@ -1,0 +1,47 @@
+//
+// Math
+//
+
+@function gcd($a, $b) {
+  @if ($b != 0) {@return gcd($b, $a % $b)} @else {@return abs($a)}
+}
+
+@function sqrt($number) {
+  $temp: 1;
+  $sqrt: 1;
+
+  @for $i from 1 through 10 {
+    $sqrt: $temp - ($temp * $temp - abs($number)) / (2 * $temp);
+    $temp: $sqrt;
+  }
+
+  @return $sqrt;
+}
+
+
+@function power($number, $power) {
+  $exponent: 1;
+
+  @if $power > 0 {
+    @for $i from 1 through $power {
+      $exponent: $exponent * $number;
+    }
+  } @else if $power < 0 {
+    @for $i from 1 through $power {
+      $exponent: $exponent / $number;
+    }
+  }
+
+  @return $exponent;
+}
+
+@function raise-ten($number, $power) {@return $number * power(10, $power)}
+
+@function square($number) {@return $number * $number}
+
+@function hex-height($side) {@return $side * sqrt(3)}
+@function hex-width($side) {@return $side * 2}
+
+@function hypotenuse-length($opposite, $adjacent) {
+  @return sqrt(square($opposite) + square($adjacent));
+}

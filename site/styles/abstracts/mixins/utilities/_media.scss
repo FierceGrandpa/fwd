@@ -1,0 +1,79 @@
+//
+// Media
+//
+
+@mixin x-between ($min-device-width, $max-device-width: null, $orientation: null) {
+  @if ($orientation != null) {
+    @if ($max-device-width != null) { @media only screen and (min-device-width: $min-device-width) and (max-device-width: $max-device-width) and (orientation: $orientation) {@content} }
+    @else { @media only screen and (device-width: $min-device-width) and (orientation: $orientation) {@content} }
+  }
+  @else { @media only screen and (min-device-width: $min-device-width) and (max-device-width: $max-device-width - 0.01) {@content} }
+}
+@mixin x-until ($device-width) {
+  @media screen and (max-width: $device-width - 0.01) {@content}
+}
+
+@mixin _320($orientation: null) {
+  @if ($orientation == portrait) { @include x-between(320px, null, portrait) {@content} }
+  @else if ($orientation == landscape) { @include x-between(480px, null, landscape) {@content} }
+  @else { @include x-between(320px, 480px) {@content} }
+}
+
+@mixin _480 { @include x-between(480px, 800px) {@content} }
+
+@mixin _640 { @include x-between(640px, 960px) {@content} }
+
+@mixin _720($is-landscape: false) {
+  @if ($is-landscape) { @include x-between(720px, 1280px, landscape) {@content} }
+  @else { @include x-between(720px, 1280px) {@content} }
+}
+
+@mixin _768($orientation: null) {
+  @if ($orientation == portrait) { @include x-between(768px, 1024px, portrait) {@content} }
+  @else if ($orientation == landscape) { @include x-between(768px, 1024px, landscape) {@content} }
+  @else { @include x-between(768px, 1024px) {@content} }
+}
+
+@mixin _1280 { @include x-until(1280px) {@content} }
+
+@mixin _1366 { @include x-until(1366px) {@content} }
+
+@mixin _1440 { @include x-until(1440px) {@content} }
+
+@mixin _1600 { @include x-until(1600px) {@content} }
+
+@mixin _1680 { @include x-until(1680px) {@content} }
+
+@mixin _1920 { @include x-until(1920px) {@content} }
+
+@mixin base-responsive($property, $xxl, $xl, $lg, $md, $sm, $xs) {
+  /* Large desktops and laptops */
+  @media (min-width: 1200px) {
+    #{$property}: $xxl;
+  }
+
+  /* Landscape tablets and medium desktops */
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #{$property}: $xl;
+  }
+
+  /* Portrait tablets and small desktops */
+  @media (min-width: 768px) and (max-width: 991px) {
+    #{$property}: $lg;
+  }
+
+  /* Landscape phones and portrait tablets */
+  @media (max-width: 767px) {
+    #{$property}: $md;
+  }
+
+  /* Portrait phones and smaller */
+  @media (max-width: 480px) {
+    #{$property}: $sm;
+  }
+
+  /* Iphone 5 */
+  @media (max-width: 320px) {
+    #{$property}: $xs;
+  }
+}

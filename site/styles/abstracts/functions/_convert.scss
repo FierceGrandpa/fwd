@@ -1,0 +1,15 @@
+//
+// Convert
+//
+
+@function strip-unit($value) {
+  @if ($value == null) {@return $value}
+
+  @return ($value / ($value * 0 + 1));
+}
+
+@function px2em($px, $base-font-size-px: 16px) {@return strip-unit($px / $base-font-size-px) * 1em}
+
+@function px2rem($px, $base-font-size-px: 16px) {@return strip-unit($px / $base-font-size-px) * 1rem}
+
+@function rem2px($rem, $base-font-size-px: 16px) {@return strip-unit($rem) * $base-font-size-px}

@@ -1,0 +1,65 @@
+//
+// Services Section
+//
+
+@import "styles/styles";
+
+section {
+  @include size(100%, 300px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  :global(.#{$prefix}-row) {
+    @include flexbox;
+    @include justify-content(space-between);
+    margin-left: 78px;
+
+    @media (max-width: 767px) {
+      @include flex-direction(column);
+    }
+  }
+}
+
+.top-section_left {
+  position: relative;
+  @include flex-col;
+
+  height: 86px;
+
+  &::before {
+    @include pseudo;
+    @include size(5px, 86px);
+    left: -41px - 5px;
+    background: linear-gradient(114deg, #ff572a, #f28e26);
+  }
+
+  &__header {
+    @include font(38px, 800);
+    margin-top: -10px;
+    margin-bottom: auto;
+    @media (max-width: 767px) {
+      margin-top: -3px;
+      @include font(24px, 800);
+    }
+  }
+  &__text {
+    font-size: 15px;
+    margin-top: auto;
+    margin-bottom: -4px;
+    @media (max-width: 767px) {
+      @include font-size(14px);
+      @include my(0);
+    }
+  }
+}
+
+.top-section_right {
+  @include flexbox;
+  align-items: flex-end;
+
+  @media (max-width: 767px) {
+    margin-top: 20px;
+    margin-bottom: -40px;
+  }
+}

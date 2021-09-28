@@ -1,0 +1,117 @@
+//
+// Service Card
+//
+
+@import "styles/styles";
+
+.service-card {
+  $overlay: '.service-card__image-wrapper::after';
+  $eye: '.service-card__image-wrapper::before';
+
+  @include flex-col;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  overflow: hidden;
+
+  background-color: white;
+
+  border-radius: 16px;
+
+  transition: box-shadow 0.3s ease-in-out;
+  @include hoverer('box-shadow', 1px 2px 30px 6px rgba(15, 15, 15, 0.1), 0 3px 8px rgba(0, 0, 0, 0.24));
+
+  &__image-wrapper {
+    @include overlay(black, 0.5);
+
+    height: 175px;
+    & > :global(div) {
+      position: relative;
+      height: 175px;
+      width: 100%;
+
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      margin: 0;
+
+      img {
+        position: absolute;
+        inset: 0;
+        box-sizing: border-box;
+        padding: 0;
+        border: none;
+        margin: auto;
+        display: block;
+        width: 0;
+        height: 0;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        max-height: 100%;
+      }
+
+      &::before {
+        @include pseudo;
+
+        left: 0;
+        top: 0;
+
+        z-index: 1000;
+
+        width: 100%;
+        height: 100%;
+
+        background: linear-gradient(-90deg, rgba(#414141, 0.24), rgba(#010101, 0.24)) ;
+        background-size: 150%;
+      }
+    }
+  }
+
+  &__text-wrapper {
+    @include flex-center;
+    @include size(100%);
+    padding: 20px 0;
+  }
+
+  &__title {
+    margin-bottom: 0;
+
+    @include font(16px, 600, 1.4);
+
+    max-width: 80%;
+
+    text-align: center;
+
+    text-underline: none;
+    color: #000;
+  }
+
+
+  #{$overlay},
+  #{$eye} {
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  #{$eye} {
+    @include pseudo;
+    @include size(64px, 32px);
+
+    z-index: 1500;
+
+    top: calc(50% - 8px);
+    left: calc(50% - 16px);
+
+    @include bg-cover('icons/eye.png');
+    background-size: contain;
+  }
+
+  &:hover #{$overlay},
+  &:hover #{$eye} {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,28 @@
+//
+// Text Reset
+//
+
+@mixin reset-text {
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: normal;
+
+  line-height: normal;
+  line-break: auto;
+
+  text-align: left; // Fallback for where `start` is not supported
+  text-align: start;
+
+  text-decoration: none;
+  text-shadow:     none;
+  text-transform:  none;
+
+  letter-spacing: normal;
+
+  word-break:   normal;
+  word-spacing: normal;
+
+  white-space: normal;
+}

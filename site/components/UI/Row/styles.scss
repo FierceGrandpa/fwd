@@ -1,0 +1,21 @@
+//
+// Row
+//
+
+@import "styles/styles";
+
+.#{$prefix}-row {
+  width: 100%;
+
+  @include mx(78px);
+  &--half {
+    @include mx(38px);
+  }
+}
+
+@media (max-width: 767px) {
+  .#{$prefix}-row,
+  .#{$prefix}-row--half {
+    @include mx(0);
+  }
+}

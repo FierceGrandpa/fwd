@@ -1,0 +1,14 @@
+//
+// Font Smooth
+//
+
+@mixin font-smooth($value: pixel) {
+  @if $value == subpixel {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+  @if $value == pixel {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

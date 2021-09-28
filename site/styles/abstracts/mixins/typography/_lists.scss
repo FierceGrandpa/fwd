@@ -1,0 +1,51 @@
+//
+// Lists
+//
+
+@mixin reset-list {
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style-image: none;
+    list-style-type: none;
+
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@mixin list-horiz {
+  margin: 0;
+  padding-left: 0;
+
+  list-style: none;
+
+  li {
+    display: inline-block;
+  }
+}
+
+@mixin list-inline {
+  @include reset-list;
+  font-size: 0;
+
+  > li {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1rem;
+  }
+}
+
+@mixin no-bullet {
+  list-style-image: none;
+  list-style-type : none;
+  margin-left     : 0;
+}
+
+@mixin no-bullets {
+  list-style: none;
+  li {@include no-bullet}
+}

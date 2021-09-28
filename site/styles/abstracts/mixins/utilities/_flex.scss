@@ -1,0 +1,83 @@
+//
+// Flex
+//
+
+@mixin flexbox {display: flex}
+%flexbox { @include flexbox }
+
+@mixin inline-flex {display: inline-flex}
+%inline-flex { @include inline-flex }
+
+// Values: row | row-reverse | column | column-reverse
+@mixin flex-direction($value: row) {flex-direction: $value}
+@mixin flex-dir($args...) { @include flex-direction($args...) }
+
+// Values: nowrap | wrap | wrap-reverse
+@mixin flex-wrap($value: nowrap) {flex-wrap: $value}
+
+// Values: <flex-direction> | <flex-wrap>
+@mixin flex-flow($values: (row nowrap)) {flex-flow: $values}
+
+@mixin order($int: 0) {order: $int}
+@mixin flex-grow($int: 0) {flex-grow: $int}
+@mixin flex-shrink($int: 1) {flex-shrink: $int}
+
+// Values: Like "width"
+@mixin flex-basis($value: auto) {flex-basis: $value}
+
+// Values: none | <flex-grow> <flex-shrink> || <flex-basis>
+@mixin flex($fg: 1, $fs: null, $fb: null) {flex: $fg $fs $fb}
+
+// Values: flex-start | flex-end | center | space-between | space-around
+@mixin justify-content($value: flex-start) {justify-content: $value}
+@mixin flex-just($args...) {@include justify-content($args...)}
+
+// Values: flex-start | flex-end | center | baseline | stretch
+@mixin align-items($value: stretch) {align-items: $value}
+
+// Values: auto | flex-start | flex-end | center | baseline | stretch
+@mixin align-self($value: auto) {align-self: $value}
+
+// Values: flex-start | flex-end | center | space-between | space-around | stretch
+@mixin align-content($value: stretch) {align-content: $value}
+
+// Shorter versions:
+
+@mixin flex-col {
+  @include flexbox;
+
+  @include flex-dir(column);
+}
+@mixin flex-row {
+  @include flexbox;
+
+  @include flex-dir(row);
+}
+
+@mixin flex-center-vert {
+  @include flexbox;
+
+  @include align-items(center);
+}
+@mixin flex-center-horiz {
+  @include flexbox;
+
+  @include flex-just(center);
+}
+
+@mixin flex-center {
+  @include flexbox;
+
+  @include align-items(center);
+  @include flex-just(center);
+}
+@mixin flex-center-row {
+  @include flex-center;
+
+  @include flex-dir(row);
+}
+@mixin flex-center-col {
+  @include flex-center;
+
+  @include flex-dir(column);
+}

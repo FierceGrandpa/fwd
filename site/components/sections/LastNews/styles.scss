@@ -1,0 +1,22 @@
+//
+// News Section
+//
+
+@import "styles/styles";
+
+.news-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  margin-bottom: 70px;
+  @media (max-width: 1300px) {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+
+    margin-bottom: 0;
+  }
+  grid-gap: 40px;
+  align-items: stretch;
+}

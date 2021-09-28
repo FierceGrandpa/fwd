@@ -1,0 +1,9 @@
+//
+// Background Cover
+//
+
+@mixin bg-cover($src) {
+  background-image: url('img/' + $src);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

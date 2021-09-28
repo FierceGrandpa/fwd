@@ -1,0 +1,36 @@
+//
+// Text Truncate
+//
+
+%ellipsis-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+@mixin lines-overflow($lines-to-show) {
+  display: block;
+  @extend %ellipsis-overflow;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+}
+
+@mixin ellipsis {
+  @extend %ellipsis-overflow;
+  white-space: nowrap;
+}
+
+@mixin ellipsis-lines($lines-to-show) {
+  @include lines-overflow($lines-to-show);
+}
+
+@mixin ellipsis-multiline-simple($height, $lines-to-show) {
+  @include lines-overflow($lines-to-show);
+  max-height: $height;
+}
+
+@mixin ellipsis-multiline($font-size: 1rem, $line-height: 1, $lines-to-show: 2) {
+  @include lines-overflow($lines-to-show);
+  max-height: $font-size*$line-height*$lines-to-show;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+

@@ -1,0 +1,22 @@
+//
+// Visibility
+//
+
+@mixin _set-visible($position, $clip, $visibility, $overflow) {
+  position:   $position   !important;
+  clip:       $clip       !important;
+  visibility: $visibility !important;
+  overflow:   $visibility;
+}
+
+@mixin visible {
+  @include _set-visible(static, auto, visible);
+}
+
+@mixin hidden {
+  @include _set-visible(absolute, rect(1px, 1px, 1px, 1px), hidden);
+}
+
+@mixin invisible {
+  display: none !important;
+}

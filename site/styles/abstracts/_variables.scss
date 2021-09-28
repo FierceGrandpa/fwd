@@ -1,0 +1,38 @@
+//
+// Variables
+//
+
+$prefix: 'fwd';
+
+// Base
+$base-font-family: Montserrat, sans-serif;
+$base-font-size: 16px;
+$base-font-weight: 400;
+
+$base-line-height: 1.5;
+
+// Body
+$body-background: #0a0a0a;
+$body-color: white;
+
+// Heading
+$heading-font-weight: 500;
+$heading-line-height: 1.2;
+
+// Scrollbar
+$scrollbar_width: 10px;
+
+$scrollbar__track_radius: 10px;
+
+$scrollbar__thumb_margin-y: 5px;
+$scrollbar__thumb_radius: 10px;
+$scrollbar__thumb_color: #545454;
+
+// Button
+
+$button-radius: 8px;
+
+$button-color: #fefefe;
+$button-bg: linear-gradient(114deg, #ff572a, #f28e26);
+$button-shadow: rgba(#f18d26, 0.1) 0px 4px 16px, rgba(#f18d26, 0.1) 0px 8px 24px, rgba(#f18d26, 0.1) 0px 16px 56px ;
+$button--hover-shadow: 0 2px 0px rgba(#f18d26, 0.2);

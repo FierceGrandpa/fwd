@@ -1,0 +1,13 @@
+//
+// Font
+//
+
+@import "font-size";
+
+@mixin font($size, $weight, $height: false) {
+  @include font-size($size);
+  font-weight: $weight;
+  @if ($height) {
+    line-height: $height;
+  }
+}

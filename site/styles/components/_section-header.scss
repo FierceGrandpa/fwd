@@ -1,0 +1,22 @@
+//
+// Section Header
+//
+
+%section-header {
+  margin-bottom: 60px;
+  @media (max-width: 767px) {
+    margin-bottom: 40px;
+  }
+}
+%section-title {
+  @include font(34px, 900);
+  @media (max-width: 767px) {
+    @include font(24px, 800);
+    margin-bottom: 20px;
+  }
+}
+%section-subtitle {
+  @include font(15px, normal);
+}
+
+

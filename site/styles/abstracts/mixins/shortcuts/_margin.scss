@@ -1,0 +1,13 @@
+//
+// Margin
+//
+
+@mixin mx($size) {
+  margin-left:  $size;
+  margin-right: $size;
+}
+
+@mixin my($size) {
+  margin-bottom: $size;
+  margin-top:    $size;
+}

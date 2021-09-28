@@ -1,0 +1,8 @@
+//
+// Columns
+//
+
+@mixin columns($count: 3, $gap: 10) {
+  column-count: $count;
+  column-gap: $gap;
+}

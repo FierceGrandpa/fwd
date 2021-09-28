@@ -1,0 +1,17 @@
+//
+// Services Section
+//
+
+@import "styles/styles";
+
+.services-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  margin-bottom: 40px;
+  @media (max-width: 767px) {
+    margin-bottom: 20px;
+  }
+  grid-gap: 40px;
+  align-items: stretch;
+}

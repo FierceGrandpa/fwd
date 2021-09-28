@@ -1,0 +1,239 @@
+//
+// Header
+//
+
+@import "styles/styles";
+
+$h: 72px;
+
+$row-h: 46px;
+
+$p: (($h - $row-h) / 2) 0;
+
+$header-bg: #0f0f0f;
+$header-color: white;
+
+$left-border-color: #3f3f3f;
+
+%list-link {
+  position: relative;
+  transition: all 250ms ease-in-out;
+  @include font(14px, 400);
+  text-decoration: none;
+}
+
+%active-link {
+  text-shadow: 0 0 24px rgba(#f18d26, 0.3);
+}
+
+@mixin text-gradient($deg, $c1, $c2, $size) {
+  background-image: linear-gradient($deg, $c1, $c2);
+  background-size: $size;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin text-gradient-primary {
+  @include text-gradient(114deg, #ff572a, #f28e26, 150%)
+}
+@mixin text-gradient-secondary {
+  @include text-gradient(-88deg, #ff572a, #f28e26, 150%)
+}
+
+@mixin create-horizontal-list-margin($margin) {
+  &:first-child {
+    margin-left: 0;
+  }
+  margin-left: $margin;
+}
+
+.#{$prefix}-header {
+  position: relative;
+
+  padding: $p;
+
+  @include size(100%, $h);
+
+  background: $header-bg;
+  color: $header-color;
+
+  &-row {
+    @include mx(39px);
+    @media (max-width: 767px) {
+      @include mx(0);
+    }
+    height: $row-h;
+  }
+
+  &__separator {
+    @include size(1px, $row-h);
+
+    margin: 0 64px;
+
+    background-color: $left-border-color;
+
+    @media (max-width: 992px) {
+      display: none;
+    }
+  }
+
+  &-nav {
+    display: inline-block;
+    &__list {
+      display: flex;
+
+      width: 100%;
+
+      @include clean;
+    }
+    &__item {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+
+      @include create-horizontal-list-margin(34px);
+
+      &:hover {
+        .#{$prefix}-header-nav__link {
+          color: #f28e26;
+          @extend %active-link;
+          &:after {
+            width: 100%;
+          }
+        }
+      }
+    }
+    &__link {
+      @extend %list-link;
+
+      &--active {
+        font-weight: 800;
+        @extend %active-link;
+        @include text-gradient-primary;
+
+        &:hover {
+          @include text-gradient-secondary;
+        }
+      }
+      &:after {
+        @include pseudo;
+        @include size(0, 1px);
+        bottom: -3px;
+        left: 0;
+        background-color: rgba(#f28e26, 0.5);
+        transition: width 250ms ease-in-out;
+      }
+      color: white;
+    }
+  }
+  @media (max-width: 767px) {
+    &-nav {
+      position: fixed;
+      overflow: hidden;
+      z-index: 1000;
+      top: $h;
+      left: 0;
+      @include size(100%, 0);
+      background-color: $header-bg;
+
+      transition: all 0.4s ease 0s;
+
+      padding: 0 20px;
+
+      &--active {
+        height: 100%;
+      }
+
+      &__list,
+      &__item {
+        display: block;
+      }
+
+      &__list {
+        padding-top: $h;
+      }
+      &__item,
+      &__item:first-child {
+        @include mx(39px);
+        margin-bottom: 20px;
+        padding: 20px 0;
+        @include flex-center;
+      }
+      &__link {
+        @include font-size(24px);
+      }
+    }
+  }
+
+
+  @media (max-width: 992px) {
+    :global(.#{$prefix}-container) {
+      @include justify-content(space-between);
+    }
+  }
+
+  &__phone {
+    position: relative;
+    margin-left: auto;
+
+    @include font(14px, 800);
+
+    :global(a) {
+      color: white;
+      text-decoration: none;
+    }
+
+    &::before {
+      @include pseudo;
+      @include size(16px);
+
+      margin-left: calc(-16px - 20px);
+
+      filter: drop-shadow(0 0 24px rgba(#f18d26, 0.5));
+
+      @include bg-cover('icons/phone.png');
+    }
+    @media (max-width: 992px) {
+      display: none;
+    }
+  }
+
+  &__burger {
+    display: none;
+
+    @media (max-width: 767px) {
+      cursor: pointer;
+      z-index: 2000;
+      display: block;
+      position: relative;
+      @include size(30px, 20px);
+      margin-right: 16px;
+      &:before,
+      span,
+      &:after {
+        @include pseudo;
+        left: 0;
+        @include size(100%, 1px);
+        background-color: $left-border-color;
+        transition: all 0.3s ease 0s;
+      }
+      &:before { top: 0 }
+      span { top: 10px; transition: all 0.5s ease 0s; }
+      &:after { top: 20px }
+    }
+
+    &--active {
+      &:before {
+        transform: rotate(45deg);
+        top: 10px
+      }
+      span {
+        transform: scale(0);
+      }
+      &:after {
+        transform: rotate(-45deg);
+        top: 10px;
+      }
+    }
+  }
+}

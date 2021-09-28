@@ -1,0 +1,11 @@
+// Padding
+
+@mixin px($size) {
+  padding-left: $size;
+  padding-right: $size;
+}
+
+@mixin py($size) {
+  padding-top: $size;
+  padding-bottom: $size;
+}

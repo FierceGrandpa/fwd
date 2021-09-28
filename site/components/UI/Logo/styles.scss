@@ -1,0 +1,35 @@
+//
+// Logo
+//
+
+@import "styles/styles";
+
+.#{$prefix}-logo {
+  position: relative;
+cursor: pointer;
+  height: 100%;
+
+  z-index: 2000;
+
+  @include flex-col;
+  justify-content: center;
+
+  &::before  {
+    @include pseudo;
+    @include size(46px);
+
+    @include bg-cover('icons/wheel.png');
+    background-size: contain;
+  }
+
+  span {
+    margin-left: 28px;
+
+    @include font(11px, 800);
+
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    color: white;
+  }
+}

@@ -1,0 +1,143 @@
+//
+// Footer
+//
+
+@import "styles/styles";
+
+.#{$prefix}-footer {
+  background-color: #1a1a1a;
+
+  .only-mobile {
+    display: none;
+  }
+
+  :global(.#{$prefix}-row) {
+    @include flex-center-vert;
+    justify-content: left;
+    @media (max-width: 767px) {
+      @include flex-direction(column);
+
+      :global(.#{$prefix}-button) {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    position: relative;
+    :global(.#{$prefix}-logo) {
+      display: none;
+    }
+    .only-mobile {
+      display: block;
+    }
+  }
+
+  height: 228px;
+  @media (max-width: 767px) {
+    height: 72px;
+  }
+  width: 100%;
+
+  &__widget {
+    @include flex-col;
+    width: 100%;
+    margin-left: 64px;
+    @media (max-width: 767px) {
+      margin-left: 0;
+      @media (max-width: 767px) {
+        p {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+.#{$prefix}-footer-nav {
+  min-width: 450px;
+  margin-bottom: 10px;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  &__list {
+    white-space: nowrap;
+    list-style: none;
+    width: 100%;
+    @include clean;
+  }
+  &__item {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+    &:first-child {
+      margin-left: 0;
+    }
+    margin-left: 34px;
+  }
+  &__link {
+    font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    @include font(14px, 400);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    color: rgba(white, 0.36);
+  }
+}
+
+.#{$prefix}-footer__text {
+  margin-bottom: 0.5rem;
+
+  @include font(14px, 400);
+
+  @media (max-width: 767px) {
+    text-align: center;
+    margin-bottom: 0;
+    span {
+      display: none;
+    }
+  }
+
+  &--accent {
+    font-weight: bold;
+  }
+}
+
+.social-icons {
+  white-space: nowrap;
+  list-style: none;
+  width: 100%;
+  @include clean;
+
+  @media (max-width: 1300px) {
+    display: none;
+  }
+}
+.social-icon {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+
+  &:first-child {
+    margin-left: 0;
+  }
+  margin-left: 28px;
+}
+
+.developer-info {
+  padding-top: 12px;
+  margin-bottom: -28px;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  @include font(12px, 400);
+
+  span {
+    font-weight: bold;
+  }
+}

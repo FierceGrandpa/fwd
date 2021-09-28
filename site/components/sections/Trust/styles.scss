@@ -1,0 +1,36 @@
+//
+// Trust Section
+//
+
+@import "styles/styles";
+
+section {
+  @media (max-width: 767px) {
+    :global(.#{$prefix}-row:last-child) :global(.#{$prefix}-button) {
+      width: 100%;
+    }
+  }
+}
+
+.trust-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  transition: all 0.3s ease;
+  grid-gap: 40px;
+  align-items: stretch;
+  margin-bottom: -200px;
+  @media (max-width: 767px) {
+    margin-bottom: -510px;
+  }
+
+  &.open {
+    margin-bottom: 70px;
+    @include _1920 {
+      margin-bottom: 50px;
+    }
+  }
+}

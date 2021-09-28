@@ -1,0 +1,65 @@
+//
+// Map Section
+//
+
+@import "styles/styles";
+
+section,
+.map-wrapper,
+.map-wrapper iframe {
+  @include size(100%, 700px);
+
+
+  @media (max-width: 767px) {
+    height: 450px;
+  }
+}
+
+.float-header {
+  z-index: 100;
+  width: 100%;
+  padding: 24px 36px;
+  @media (max-width: 767px) {
+    padding: 14px 28px;
+  }
+
+  .section-subtitle {
+    margin-bottom: 0;
+  }
+
+  border-radius: 12px;
+}
+
+.map-wrapper {
+  position: relative;
+  cursor: help;
+  overflow: hidden;
+
+  :global(.#{$prefix}-container) {
+    align-items: flex-start;
+  }
+
+
+  :global(.#{$prefix}-row) {
+    z-index: 1;
+  }
+
+  @media (max-width: 767px) {
+    :global(.section-title) {
+      margin-bottom: 10px;
+    }
+  }
+
+  :global(.#{$prefix}-row) {
+    padding-top: 60px;
+
+    width: auto;
+  }
+
+  .section-header {
+    margin-bottom: 0 !important;
+  }
+}
+.map-wrapper iframe {
+  @include absolute(0, 0, 0, 0);
+}

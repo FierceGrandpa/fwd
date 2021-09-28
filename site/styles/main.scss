@@ -1,0 +1,185 @@
+@import "styles/styles";
+
+:global(*),
+:global(*::after),
+:global(*::before) {
+  box-sizing: border-box;
+}
+
+:global(html) {
+  scroll-behavior: smooth;
+  font-display: swap;
+}
+
+:global(body) {
+  @include clean;
+
+  font-family: $base-font-family;
+
+  @include font($base-font-size, $base-font-weight, $base-line-height);
+
+  color: $body-color;
+  background-color: $body-background;
+
+  @include font-smooth;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  text-align: left;
+
+  height: 100%;
+  max-height: 999999px;
+
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+
+
+  :global(&::-webkit-scrollbar) {
+    width: $scrollbar_width;
+  }
+  :global(&::-webkit-scrollbar-track) {border-radius: $scrollbar__track_radius}
+  :global(&::-webkit-scrollbar-thumb) {
+    padding-right: 2px;
+    @include my($scrollbar__thumb_margin-y);
+    border-radius: $scrollbar__thumb_radius;
+    background-color: $scrollbar__thumb_color;
+  }
+}
+
+:global(.section-header) {
+  @extend %section-header;
+}
+:global(.section-title) {
+  @extend %section-title;
+}
+:global(.section-subtitle) {
+  @extend %section-subtitle;
+}
+
+:global(.section-primary) {
+  width: 100%;
+
+  padding-top: 40px;
+  padding-bottom: 30px;
+}
+
+:global(.light-color) {
+  color: white;
+}
+:global(.dark-color) {
+  color: #0f0f0f;
+}
+
+:global(.light-bg) {
+  background-color: white;
+}
+:global(.dark-bg) {
+  background-color: #0f0f0f;
+}
+
+:global(&::-moz-focus-inner) {
+  padding: 0;
+  border-style: none;
+}
+
+
+:global([tabindex="-1"]:focus:not(:focus-visible)) {
+  outline: 0 !important;
+}
+
+%text {
+  margin-top: 0;
+  margin-bottom: calc(#{$base-font-size} * 0.5);
+}
+
+@mixin _h($size) {
+  @extend %text;
+  @include font($size, $heading-font-weight, $heading-line-height);
+}
+
+:global(h1) {@include _h($base-font-size * 2.50)}
+:global(h2) {@include _h($base-font-size * 2.00)}
+:global(h3) {@include _h($base-font-size * 1.75)}
+:global(h4) {@include _h($base-font-size * 1.50)}
+:global(h5) {@include _h($base-font-size * 1.25)}
+:global(h6) {@include _h($base-font-size * 1.00)}
+
+:global(p) { @extend %text }
+
+:global(address) {
+  margin-bottom: $base-font-size;
+  font-style: normal;
+  line-height: inherit;
+}
+
+:global(ol), :global(ul) {
+  padding-left: 2rem;
+
+  margin-top: 0;
+  margin-bottom: $base-font-size;
+
+  :global(ol), :global(ul) {
+    margin-bottom: 0;
+  }
+}
+
+:global(b), :global(strong) {font-weight: bolder}
+
+:global(small) {font-size: 0.875em}
+
+:global(a:not([href]):not([class])) {
+  @include hoverer('color', inherit, inherit);
+  @include hoverer('text-decoration', none, none);
+}
+
+
+:global(img), :global(svg) {vertical-align: middle}
+
+:global(label) {display: inline-block}
+
+:global(button) {
+  border-radius: 0;
+  margin: 0;
+  font: inherit;
+  text-transform: none;
+  :global(&:focus) {
+    outline: dotted 1px;
+    outline: -webkit-focus-ring-color auto 5px;
+    :global(&:not(:focus-visible)) {
+      outline: 0;
+    }
+  }
+}
+
+:global(input),
+:global(select),
+:global(textarea) {
+  margin: 0;
+  font: inherit;
+}
+
+:global(select) {
+  text-transform: none;
+  word-wrap: normal;
+  :global(&:disabled) {opacity: 1}
+}
+
+:global(textarea) {resize: vertical}
+
+:global([role="button"]) {cursor: pointer}
+
+:global(button),
+:global([type="button"]),
+:global([type="reset"]),
+:global([type="submit"]) {
+  -webkit-appearance: button;
+  &:not(:disabled) {cursor: pointer}
+}
+:global([type="search"]) {
+  outline-offset: -2px;
+  -webkit-appearance: textfield;
+}
+
+:global(iframe) {border: 0}
+
+:global([hidden]) {display: none !important}

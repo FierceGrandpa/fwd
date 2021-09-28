@@ -1,0 +1,29 @@
+//
+// Links
+//
+
+
+@mixin link-text {
+  color: inherit;
+
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: none;
+
+  @content;
+}
+
+@mixin reset-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: inherit;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+    text-decoration: none;
+
+    outline: none;
+  }
+}

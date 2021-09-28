@@ -1,0 +1,12 @@
+//
+// Wrap
+//
+
+@mixin force-wrap {
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+@mixin no-wrap {
+  white-space: nowrap;
+}

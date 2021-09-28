@@ -1,0 +1,5 @@
+//
+// Remove Focus
+//
+
+@mixin remove-focus { &:focus {outline: none} }

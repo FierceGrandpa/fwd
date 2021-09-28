@@ -1,0 +1,82 @@
+//
+// Services Section
+//
+
+@import "styles/styles";
+
+section {
+  @include size(100%, calc(100vh - 72px));
+  @media (max-width: 767px) {
+    @include size(100%);
+  }
+
+  @include bg-cover('bg/main.webp');
+  background-position: center;
+
+  :global(.#{$prefix}-container) {
+    @include flex-center-col;
+    align-items: start;
+  }
+
+  :global(.#{$prefix}-row:first-child) {
+    position: relative;
+    margin-top: 48px + 14px * 2 + 16px;
+    @media (max-width: 767px) {
+      margin-top: 24px;
+    }
+
+    &::before {
+      @include pseudo;
+      @include size(5px, 206px);
+      left: -34px - 5px;
+      background: linear-gradient(114deg, #ff572a, #f28e26);
+    }
+  }
+  :global(.#{$prefix}-row:last-child) {
+    margin-top: 48px;
+    @media (max-width: 767px) {
+      @include my(36px);
+
+      :global(.#{$prefix}-button) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.promo-content {
+  @include flex-col;
+
+  height: 206px;
+
+  &__header {
+    @include font(38px, 800);
+    margin-top: -8px;
+    margin-bottom: auto;
+
+    @media (max-width: 767px) {
+      margin-top: 48px;
+      @include font(24px, 800);
+    }
+  }
+  &__text {
+    @include font-size(15px);
+    margin-top: auto;
+    margin-bottom: -4px;
+    @media (max-width: 767px) {
+      @include font-size(14px);
+      @include my(0);
+    }
+  }
+
+  span {
+    text-shadow: 0 0 18px rgba(#f18d26, 0.3);
+    background-image:  linear-gradient(38deg, #f28e26, #ff572a);
+    &:last-child {
+      background-image:  linear-gradient(-88deg, #f28e26, #ff572a);
+    }
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

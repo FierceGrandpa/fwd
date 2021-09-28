@@ -3,8 +3,8 @@ import Layout from 'components/Layout';
 import { Container, Row } from 'components/UI';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { site } from '../../data';
 import ArticleCard from 'components/admin/ArticleCard';
+import { site } from '../../data';
 
 export default function AdminArticlesPage() {
   const [password, setPassword] = useState('');
@@ -19,12 +19,16 @@ export default function AdminArticlesPage() {
     'Content-Type': 'application/json',
     Authorization: localStorage.getItem('key'),
   };
+  const config = {
+    headers,
+    crossDomain: true,
+  };
 
   const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/articles/') => ({
     fetchAll: () => axios.get(url),
-    create: (newRecord) => axios.post(url, newRecord, { headers }),
-    update: (id, updatedRecord) => axios.put(url + id, updatedRecord, { headers }),
-    delete: (id) => axios.delete(url + id, { headers }),
+    create: (newRecord) => axios.post(url, newRecord, config),
+    update: (id, updatedRecord) => axios.put(url + id, updatedRecord, config),
+    delete: (id) => axios.delete(url + id, config),
   });
 
   function refreshList() {

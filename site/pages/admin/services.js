@@ -18,14 +18,19 @@ export default function AdminServicesPage() {
 
   const headers = {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
     Authorization: localStorage.getItem('key'),
+  };
+  const config = {
+    headers,
+    mode: 'no-cors',
   };
 
   const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/services/') => ({
     fetchAll: () => axios.get(url),
-    create: (newRecord) => axios.post(url, newRecord, { headers }),
-    update: (id, updatedRecord) => axios.put(url + id, updatedRecord, { headers }),
-    delete: (id) => axios.delete(url + id, { headers }),
+    create: (newRecord) => axios.post(url, newRecord, config),
+    update: (id, updatedRecord) => axios.put(url + id, updatedRecord, config),
+    delete: (id) => axios.delete(url + id, config),
   });
 
   function refreshList() {

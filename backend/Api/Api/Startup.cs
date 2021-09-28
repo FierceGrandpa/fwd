@@ -37,23 +37,19 @@ namespace Api
             );
 
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .SetIsOriginAllowed((host) => true)
+                        .AllowAnyHeader());
+            });
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseCors(options => options
-                .WithOrigins(
-                    "http://localhost",
-                    "https://localhost",
-                    "http://localhost:3000",
-                    "https://localhost:3000",
-                    "http://localhost:80",
-                    "https://localhost:80"
-                )
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-
             if (Env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -68,6 +64,7 @@ namespace Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

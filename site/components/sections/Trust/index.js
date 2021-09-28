@@ -12,7 +12,7 @@ const TrustSection = () => {
   const [open, setOpen] = useState(false);
   const [marks, setList] = useState([]);
 
-  const API = (url = 'https://localhost:44358/api/marks/') => ({
+  const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/marks/') => ({
     fetchAll: () => axios.get(url),
   });
 

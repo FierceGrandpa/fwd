@@ -46,7 +46,7 @@ export default function ServicesPage() {
   };
 
   useEffect(() => {
-    axios.get('https://localhost:44358/api/services/')
+    axios.get('https://u1487495.plsk.regruhosting.ru/api/services/')
       .then((res) => {
         setList(res.data);
       })

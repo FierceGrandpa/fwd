@@ -5,7 +5,6 @@ C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\Api.runtimeconfig.json
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\Api.runtimeconfig.dev.json
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\Api.dll
-C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\ref\Api.dll
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\Api.pdb
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\Microsoft.Data.Sqlite.dll
@@ -42,12 +41,11 @@ C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\Api.csproj.CoreCompileInputs.cache
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\staticwebassets\Api.StaticWebAssets.Manifest.cache
-C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\staticwebassets\Api.StaticWebAssets.xml
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\scopedcss\bundle\Api.styles.css
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\Api.RazorTargetAssemblyInfo.cache
-C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\Api.csproj.CopyComplete
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\Api.dll
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\ref\Api.dll
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\Api.pdb
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\Api.genruntimeconfig.cache
 C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Shop59\Desktop\Проекты\Полный привод\backend\Api\Api\obj\Debug\net5.0\refint\Api.dll

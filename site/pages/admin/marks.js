@@ -21,7 +21,7 @@ export default function AdminMarksPage() {
     Authorization: localStorage.getItem('key'),
   };
 
-  const API = (url = 'https://localhost:44358/api/marks/') => ({
+  const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/marks/') => ({
     fetchAll: () => axios.get(url),
     create: (newRecord) => axios.post(url, newRecord, { headers }),
     update: (id, updatedRecord) => axios.put(url + id, updatedRecord, { headers }),

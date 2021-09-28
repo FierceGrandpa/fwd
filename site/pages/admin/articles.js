@@ -20,7 +20,7 @@ export default function AdminArticlesPage() {
     Authorization: localStorage.getItem('key'),
   };
 
-  const API = (url = 'https://localhost:44358/api/articles/') => ({
+  const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/articles/') => ({
     fetchAll: () => axios.get(url),
     create: (newRecord) => axios.post(url, newRecord, { headers }),
     update: (id, updatedRecord) => axios.put(url + id, updatedRecord, { headers }),

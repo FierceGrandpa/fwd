@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import Layout from 'components/Layout';
 
-import { Container } from 'components/UI';
+import { Container, Row } from 'components/UI';
 import { site } from '../../data';
 
 const links = [
@@ -66,20 +66,41 @@ export default function AdminPage() {
     return 'loading...';
   }
 
-  if (password === site.password) {
-    localStorage.setItem('key', site.key);
-  }
+  const onFormSubmit = (e) => {
+    if (password === site.password) {
+      localStorage.setItem('key', site.key);
+    }
+  };
+
   if (localStorage.getItem('key') !== site.key) {
     return (
       <>
         <Layout>
           <section>
             <Container>
-              <input
-                type="text"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
+              <Row>
+                <form className="form-card" onSubmit={onFormSubmit}>
+                  <div className="section-header light-color">
+                    <h2 className="section-title">Admin Panel</h2>
+                    <p className="section-subtitle">
+                      Please login to administer
+                    </p>
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="password"
+                      className="form-control"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <button type="submit" className="btn">Войти</button>
+                  </div>
+                </form>
+              </Row>
             </Container>
           </section>
         </Layout>
@@ -88,6 +109,96 @@ export default function AdminPage() {
             section {
               height: calc(100vh - 72px - 72px);
             }
+            
+            
+        .form-group {
+            margin-bottom: 1rem;
+        }
+            
+          .section-title {
+          width: 100%;
+    align-items: end;
+    display: flex;
+    
+              a {
+                  margin-left: auto;
+    cursor: pointer;
+    font-size: 24px;
+    height: 100%;
+    color: #ff701b;
+    display: flex;
+    justify-content: center;
+              }
+          }
+          .top-section {
+            padding: 40px 0;
+          
+            background-color: #121212;
+            width: 100%;
+            min-height: calc(100vh - 72px - 228px);
+            @media (max-width: 767px) {
+              min-height: calc(100vh - 72px);
+            }
+          }
+              
+              
+          .form-card {
+            width: 100%;
+          }
+              .section-header {
+    margin-bottom: 20px;
+}
+            .form-card {
+           padding: 1.5rem 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #121212;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 0.5rem;
+            }
+            
+        .form-control {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1.5rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color:  transparent;
+            background-clip: padding-box;
+            border: 1px solid  rgba(255,255,255,0.2);
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        
+        
+        .btn {
+               color: rgba(255,255,255,0.4);
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+            
+            &:hover {
+              background-color: rgba(255,255,255,0.8);
+               color: rgba(0,0,0,1);
+            }
+            
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            user-select: none;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
           `}
         </style>
       </>
@@ -99,6 +210,19 @@ export default function AdminPage() {
       <Layout>
         <section>
           <Container>
+            <div className="section-header light-color">
+              <h2 className="section-title">
+                Admin Panel
+                <a
+                  href="/admin"
+                  onClick={() => {
+                    localStorage.removeItem('key');
+                  }}
+                >
+                  Выйти
+                </a>
+              </h2>
+            </div>
             <div className="admin-links">
               {links.map((link) => (
                 <Link key={link.id} href={`/admin/${link.href}`}>
@@ -114,6 +238,27 @@ export default function AdminPage() {
       </Layout>
       <style jsx>
         {`
+          .section-header {
+          
+    width: 100%;
+
+          }
+        
+          .section-title {
+          width: 100%;
+    align-items: end;
+    display: flex;
+    
+              a {
+                  margin-left: auto;
+    cursor: pointer;
+    font-size: 24px;
+    height: 100%;
+    color: #ff701b;
+    display: flex;
+    justify-content: center;
+              }
+          }
           section {
             display: flex;
             justify-content: center;

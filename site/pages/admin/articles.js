@@ -217,11 +217,10 @@ export default function AdminArticlesPage() {
         <Container>
           <Row isHalf>
             <div className="section-header light-color">
-              <h2 className="section-title">Наши статьи</h2>
-              <p className="section-subtitle">
-                Собираем всё самое интересное
-                и полезное в одном месте
-              </p>
+              <h2 className="section-title">Наши статьи
+                <a href="/admin">
+                  Назад
+                </a></h2>
             </div>
           </Row>
           <Row isHalf>
@@ -248,6 +247,21 @@ export default function AdminArticlesPage() {
       </section>
       <style jsx>
         {`
+          .section-title {
+          width: 100%;
+    align-items: end;
+    display: flex;
+    
+              a {
+                  margin-left: auto;
+    cursor: pointer;
+    font-size: 24px;
+    height: 100%;
+    color: #ff701b;
+    display: flex;
+    justify-content: center;
+              }
+          }
           .top-section {
             padding: 40px 0;
           

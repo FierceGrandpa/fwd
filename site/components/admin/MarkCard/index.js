@@ -69,7 +69,7 @@ export default function MarkCard({ addOrEdit, recordForEdit }) {
             />
           </div>
           <div className="form-group">
-            <button type="submit" className="btn">Сохранить</button>
+            <button type="submit" className="btn">{values.id ? 'Сохранить' : 'Добавить марку'}</button>
           </div>
         </div>
       </form>

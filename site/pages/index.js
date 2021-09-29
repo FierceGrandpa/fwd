@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Modal from 'components/UI/Modal';
 
 import dynamic from 'next/dynamic';
 
 import Layout from 'components/Layout';
+
+import { Api } from 'helpers/Api';
 
 import PromoSection from 'components/sections/Promo';
 
@@ -13,8 +15,22 @@ const TrustSection = dynamic(() => import('components/sections/Trust'));
 const MapSection = dynamic(() => import('components/sections/Map'));
 const LastNews = dynamic(() => import('components/sections/LastNews'));
 
-export default function HomePage() {
+const newsApi = new Api('news');
+const servicesApi = new Api('services');
+const marksApi = new Api('marks');
+
+export default function HomePage({ articlesInit, servicesInit, marksInit }) {
   const [modal, setModal] = useState(false);
+
+  const [articles, setArticles] = useState(articlesInit || []);
+  const [services, setServices] = useState(servicesInit || []);
+  const [marks, setMarks] = useState(marksInit || []);
+
+  useEffect(() => {
+    newsApi.getAll().then((res) => { setArticles(res); });
+    servicesApi.getAll().then((res) => { setServices(res); });
+    marksApi.getAll().then((res) => { setMarks(res); });
+  });
 
   function signUp() {
     setModal(true);
@@ -23,10 +39,10 @@ export default function HomePage() {
   return (
     <Layout signUp={signUp}>
       <PromoSection signUp={signUp} />
-      <ServicesSection />
-      <TrustSection />
+      <ServicesSection services={services} />
+      <TrustSection marks={marks} />
       <MapSection />
-      <LastNews />
+      <LastNews articles={articles} />
 
       <div id="modal-portal" className={modal ? 'open' : ''}>
         {modal ? (
@@ -55,4 +71,17 @@ export default function HomePage() {
       </style>
     </Layout>
   );
+}
+export async function getServerSideProps() {
+  const articlesInit = await newsApi.getAll();
+  const servicesInit = await servicesApi.getAll();
+  const marksInit = await marksApi.getAll();
+
+  return {
+    props: {
+      articlesInit,
+      servicesInit,
+      marksInit,
+    },
+  };
 }

@@ -13,7 +13,8 @@ import Pagination from 'components/UI/Pagination';
 
 import Modal from 'components/UI/Modal';
 
-import {Api} from "../helpers/Api";
+import {Api} from "helpers/Api";
+
 const api = new Api('services');
 
 export default function ServicesPage({ items }) {

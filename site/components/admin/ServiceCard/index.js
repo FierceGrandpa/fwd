@@ -179,13 +179,13 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
                 />
               </div>
               <div className="form-group">
-                <button type="button" className="btn" onClick={onOfferSubmit}>Добавить</button>
+                <button type="button" className="btn" onClick={onOfferSubmit}>Добавить оффер</button>
               </div>
             </div>
             <div className="separator" />
           </div>
           <div className="form-group">
-            <button type="submit" className="btn">Сохранить</button>
+            <button type="submit" className="btn">{values.id ? 'Сохранить услугу' : 'Добавить услугу'}</button>
           </div>
         </div>
       </form>

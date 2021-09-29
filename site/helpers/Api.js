@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost/api/';
+const apiUrl = 'https://4x4-spb.ru/';
 
 function handleResponse(response) {
   return response.text().then((text) => {

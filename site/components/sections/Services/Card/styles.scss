@@ -27,9 +27,15 @@
     @include overlay(black, 0.5);
 
     height: 175px;
+    @media (max-width: 992px) {
+      height: 250px;
+    }
     & > :global(div) {
       position: relative;
       height: 175px;
+      @media (max-width: 992px) {
+        height: 250px;
+      }
       width: 100%;
 
       display: inline-block;

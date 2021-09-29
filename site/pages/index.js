@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Modal from 'components/UI/Modal';
 
@@ -55,13 +55,4 @@ export default function HomePage() {
       </style>
     </Layout>
   );
-}
-export async function getServerSideProps() {
-  const items = await api.getAll();
-
-  return {
-    props: {
-      items,
-    },
-  }
 }

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './styles.scss';
 
 const MarkCard = ({ mark, open }) => {
@@ -5,7 +6,7 @@ const MarkCard = ({ mark, open }) => {
     <>
       <div className={`mark-card${open ? ' open' : ''}`} title={mark.alt}>
         <div>
-          <img
+          <Image
             src={mark.imageSrc}
             height={mark.height}
             width={mark.width}

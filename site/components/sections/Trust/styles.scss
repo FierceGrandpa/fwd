@@ -23,8 +23,17 @@ section {
   grid-gap: 40px;
   align-items: stretch;
   margin-bottom: -200px;
+  @media (max-width: 1300px) {
+    margin-bottom: -300px;
+  }
+  @media (max-width: 992px) {
+    margin-bottom: -550px;
+  }
   @media (max-width: 767px) {
-    margin-bottom: -510px;
+    margin-bottom: -200px;
+  }
+  @media (max-width: 576px) {
+    margin-bottom: -550px;
   }
 
   &.open {

@@ -39,7 +39,7 @@ const ServicesSection = () => {
                   title: 'Другие услуги',
                   height: 324,
                   width: 509,
-                  imageSrc: 'img/services/all_services.webp',
+                  imageSrc: '/img/services/all_services.webp',
                   alt: 'Все наши услуги',
                 }}
                 href="/services"

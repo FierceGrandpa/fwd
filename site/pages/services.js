@@ -116,7 +116,7 @@ export default function ServicesPage({ items }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const items = await api.getAll();
 
   return {

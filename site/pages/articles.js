@@ -114,7 +114,7 @@ export default function ArticlesPage({ items }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const items = await api.getAll();
 
   return {

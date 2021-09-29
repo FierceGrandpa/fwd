@@ -1,9 +1,12 @@
 const next = require('next');
 const express = require('express');
 const https = require('https');
+https.globalAgent.options.ca = require('ssl-root-cas/latest').create();
 const http = require('http');
 const fs = require('fs');
 const cors = require('cors');
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });

@@ -12,13 +12,16 @@ import {
 import Pagination from 'components/UI/Pagination';
 
 import Modal from 'components/UI/Modal';
-import axios from 'axios';
 
-export default function ServicesPage() {
+import {Api} from "../helpers/Api";
+const api = new Api('services');
+
+export default function ServicesPage({ items }) {
   const router = useRouter();
   const pageLimit = 2;
 
-  const [services, setList] = useState([]);
+  const [services, setList] = useState(items || []);
+  const [modal, setModal] = useState(false);
   const { query, route, asPath } = router;
   const { page } = query;
   const getStartIndex = () => {
@@ -34,8 +37,6 @@ export default function ServicesPage() {
     ?.replace(`?page=${page}`, '')
     ?.replace('#service-', ''), 10);
 
-  const [modal, setModal] = useState(false);
-
   function signUp() {
     setModal(true);
   }
@@ -44,13 +45,8 @@ export default function ServicesPage() {
     const offset = (getStartIndex() - 1) * pageLimit;
     return services?.sort((e) => e.id).slice(offset, offset + pageLimit);
   };
-
   useEffect(() => {
-    axios.get('https://u1487495.plsk.regruhosting.ru/api/services/')
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log(err));
+    api.getAll().then((res) => { setList(res); });
   });
 
   return (
@@ -118,4 +114,14 @@ export default function ServicesPage() {
       </style>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const items = await api.getAll();
+
+  return {
+    props: {
+      items,
+    },
+  }
 }

@@ -1,83 +1,56 @@
 import { useState, useEffect, useRef } from 'react';
 
 import Layout from 'components/Layout';
-import axios from 'axios';
 
 import { Container, Row } from 'components/UI';
 import ServiceCard from 'components/admin/ServiceCard';
 import { site } from 'data';
+import { Api } from 'helpers/Api';
 
 export default function AdminServicesPage() {
-  const [password, setPassword] = useState('');
-  const [list, setList] = useState([]);
-  const [record, setRecord] = useState(null);
-
   if (typeof window === 'undefined') {
     return 'loading...';
   }
 
-  const headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    Authorization: localStorage.getItem('key'),
-  };
-  const config = {
-    headers,
-    mode: 'no-cors',
-  };
+  const [password, setPassword] = useState('');
+  const [list, setList] = useState([]);
+  const [record, setRecord] = useState(null);
 
-  const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/services/') => ({
-    fetchAll: () => axios.get(url),
-    create: (newRecord) => axios.post(url, newRecord, config),
-    update: (id, updatedRecord) => axios.put(url + id, updatedRecord, config),
-    delete: (id) => axios.delete(url + id, config),
-  });
+  const api = new Api('services');
 
   function refreshList() {
-    API().fetchAll()
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log(err));
+    api.getAll().then((res) => { setList(res); });
   }
 
   useEffect(() => {
     refreshList();
   });
 
-  const addOrEdit = (formData, onSuccess) => {
-    if (formData.get('id') === '0') {
-      API().create(formData)
+  const addOrEdit = (data, onSuccess) => {
+    if (data.id === '') {
+      api.create(data)
         .then(() => {
           onSuccess();
           refreshList();
-        })
-        .catch((err) => console.log(err));
+        });
     } else {
-      API().update(formData.get('id'), formData)
+      api.update(data.id, data)
         .then(() => {
           onSuccess();
           refreshList();
-        })
-        .catch((err) => console.log(err));
+        });
     }
-  };
-
-  const showRecordDetails = (data) => {
-    setRecord(data);
   };
 
   const onDelete = (e, id) => {
     e.stopPropagation();
     if (window.confirm('Вы действительно хотите удалить запись?')) {
-      API().delete(id)
-        .then(() => refreshList())
-        .catch((err) => console.log(err));
+      api.remove(id).then(() => refreshList());
     }
   };
 
   const imageCard = (data) => (
-    <div className="record-card" onClick={() => { showRecordDetails(data); }}>
+    <div className="record-card" onClick={() => { setRecord(data); }}>
       <div className="record-card__image-wrapper">
         <div>
           <img src={data.imageSrc} height={data.height} width={data.width} alt={data.alt || data.imageName} />
@@ -277,7 +250,7 @@ export default function AdminServicesPage() {
               </div>
               <table className="table">
                 <tbody>
-                {
+                  {
                   [...Array(Math.ceil(list.length / 3))].map((e, i) => (
                     <tr key={i}>
                       <td>{imageCard(list[3 * i])}</td>

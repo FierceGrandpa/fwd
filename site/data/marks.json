@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "width": 126,
+        "height": 72,
+        "imageSrc": "/img/marks/uaz.webp",
+        "alt": "УАЗ"
+    },
+    {
+        "id": 2,
+        "width": 96,
+        "height": 102,
+        "imageSrc": "/img/marks/mitsubishi.webp",
+        "alt": "Mitsubishi Motors"
+    },
+    {
+        "id": 3,
+        "width": 102,
+        "height": 84,
+        "imageSrc": "/img/marks/toyota.webp",
+        "alt": "Toyota"
+    },
+    {
+        "id": 4,
+        "width": 90,
+        "height": 78,
+        "imageSrc": "/img/marks/nissan.webp",
+        "alt": "Nissan"
+    },
+    {
+        "id": 5,
+        "width": 80,
+        "height": 80,
+        "imageSrc": "/img/marks/volkswagen.webp",
+        "alt": "Volkswagen"
+    },
+    {
+        "id": 6,
+        "width": 102,
+        "height": 74,
+        "imageSrc": "/img/marks/lada.webp",
+        "alt": "Lada"
+    },
+    {
+        "id": 7,
+        "width": 78,
+        "height": 78,
+        "imageSrc": "/img/marks/volvo.webp",
+        "alt": "Volvo"
+    },
+    {
+        "id": 8,
+        "width": 96,
+        "height": 64,
+        "imageSrc": "/img/marks/suzuki.webp",
+        "alt": "Suzuki"
+    },
+    {
+        "id": 9,
+        "width": 116,
+        "height": 70,
+        "imageSrc": "/img/marks/subaru.webp",
+        "alt": "Subaru"
+    },
+    {
+        "id": 10,
+        "width": 68,
+        "height": 80,
+        "imageSrc": "/img/marks/skoda.webp",
+        "alt": "Skoda"
+    },
+    {
+        "id": 11,
+        "width": 106,
+        "height": 66,
+        "imageSrc": "/img/marks/audi.webp",
+        "alt": "Audi"
+    },
+    {
+        "id": 12,
+        "width": 80,
+        "height": "80",
+        "imageSrc": "/img/marks/bmw.webp",
+        "alt": "BMW "
+    },
+    {
+        "id": 13,
+        "width": 103,
+        "height": 40,
+        "imageSrc": "/img/marks/ford.webp",
+        "alt": "Ford"
+    },
+    {
+        "id": 14,
+        "width": 96,
+        "height": 63,
+        "imageSrc": "/img/marks/honda.webp",
+        "alt": "Honda"
+    },
+    {
+        "id": 15,
+        "width": 92,
+        "height": 58,
+        "imageSrc": "/img/marks/hyundai.webp",
+        "alt": "Hyundai"
+    },
+    {
+        "id": 16,
+        "width": 67,
+        "height": 68,
+        "imageSrc": "/img/marks/mazda.webp",
+        "alt": "Mazda"
+    },
+    {
+        "id": 17,
+        "width": 93,
+        "height": 72,
+        "imageSrc": "/img/marks/opel.webp",
+        "alt": "Opel"
+    },
+    {
+        "id": 18,
+        "width": 91,
+        "height": 65,
+        "imageSrc": "/img/marks/peugeot.webp",
+        "alt": "Peugeot"
+    },
+    {
+        "id": 19,
+        "width": 57,
+        "height": 70,
+        "imageSrc": "/img/marks/renault.webp",
+        "alt": "Renault"
+    },
+    {
+        "id": 20,
+        "width": 80,
+        "height": 64,
+        "imageSrc": "/img/marks/seat.webp",
+        "alt": "Seat"
+    }
+]

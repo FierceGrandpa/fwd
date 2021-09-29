@@ -1,110 +1,58 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useForm, defaultImageSrc } from 'helpers/form';
 import { Editor } from '@tinymce/tinymce-react';
-
-const defaultImageSrc = '/img/image_placeholder.png';
-
-const initialFieldValues = {
-  id: 0,
-  date: '',
-  title: '',
-  promo: '',
-  content: '',
-  imageName: '',
-  imageSrc: defaultImageSrc,
-  imageFile: null,
-};
 
 export default function ArticleCard({ addOrEdit, recordForEdit }) {
   const promoRef = useRef(null);
   const contentRef = useRef(null);
-  const [initialPromoValue, setInitialPromoValue] = useState(undefined);
-  const [initialContentValue, setInitialContentValue] = useState(undefined);
-  const [values, setValues] = useState(initialFieldValues);
-  const [errors, setErrors] = useState({});
-
+  const [editorValues, setEditorValues] = useState({ promo: null, content: null });
+  const {
+    reset, values, onChange,
+  } = useForm({
+    init: {
+      title: '',
+      promo: '',
+      content: '',
+      imageSrc: defaultImageSrc,
+    },
+    recordForEdit,
+  });
   useEffect(() => {
-    if (recordForEdit != null) {
-      setValues(recordForEdit);
-      setInitialPromoValue(recordForEdit.promo);
-      setInitialContentValue(recordForEdit.content);
-    }
-  }, [recordForEdit]);
+    setEditorValues({ promo: values.promo, content: values.content });
+  }, [values.promo, values.content]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
-
-  const showPreview = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setValues({
-          ...values,
-          imageFile,
-          imageSrc: x.target.result,
-        });
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      setValues({
-        ...values,
-        imageFile: null,
-        imageSrc: defaultImageSrc,
-      });
-    }
-  };
-
-  const resetForm = () => {
-    setValues(initialFieldValues);
-    document.getElementById('image-uploader').value = null;
-    setErrors({});
-  };
-
-  const handleFormSubmit = (e) => {
+  const onFormSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('id', values.id);
-    formData.append('date', new Date().toJSON());
-    formData.append('title', values.title);
-    if (promoRef.current) {
-      formData.append('promo', promoRef.current.getContent());
-    }
-    if (contentRef.current) {
-      formData.append('content', contentRef.current.getContent());
-    }
-    formData.append('imageName', values.imageName);
-    formData.append('imageFile', values.imageFile);
-    addOrEdit(formData, resetForm);
+    addOrEdit({
+      id: values.id || '',
+      title: values.title,
+      promo: promoRef.current.getContent(),
+      content: contentRef.current.getContent(),
+      imageSrc: values.imageSrc,
+    }, reset);
   };
-
-  const applyErrorClass = (field) => ((field in errors && !errors[field]) ? ' invalid-field' : '');
 
   return (
     <>
-      <form autoComplete="off" className="fwd-form" noValidate onSubmit={handleFormSubmit}>
+      <form autoComplete="off" className="fwd-form" onSubmit={onFormSubmit}>
         <img src={values.imageSrc} className="fwd-form__img" />
         <div className="fwd-form__body">
           <div className="form-group">
             <input
-              type="file"
-              accept="image/*"
-              className={`form-control-file${applyErrorClass('imageSrc')}`}
-              onChange={showPreview}
-              id="image-uploader"
+              name="imageSrc"
+              placeholder="image link"
+              className="form-control"
+              value={values.imageSrc}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
             <input
-              className={`form-control${applyErrorClass('title')}`}
-              placeholder="title"
               name="title"
-              value={values.alt}
-              onChange={handleInputChange}
+              placeholder="title"
+              className="form-control"
+              value={values.title}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
@@ -113,9 +61,9 @@ export default function ArticleCard({ addOrEdit, recordForEdit }) {
               onInit={(evt, editor) => {
                 promoRef.current = editor;
               }}
-              initialValue={initialPromoValue}
+              initialValue={editorValues.promo}
               init={{
-                height: 500,
+                height: 300,
                 menubar: false,
                 plugins: [
                   'advlist autolink lists link image charmap print preview anchor',
@@ -136,7 +84,7 @@ export default function ArticleCard({ addOrEdit, recordForEdit }) {
               onInit={(evt, editor) => {
                 contentRef.current = editor;
               }}
-              initialValue={initialContentValue}
+              initialValue={editorValues.content}
               init={{
                 height: 500,
                 menubar: false,

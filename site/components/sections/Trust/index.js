@@ -3,7 +3,7 @@ import { Button, Container, Row } from 'components/UI';
 
 import dynamic from 'next/dynamic';
 
-import axios from 'axios';
+import { Api } from 'helpers/Api';
 import styles from './styles.scss';
 
 const MarkCard = dynamic(() => import('./Card'));
@@ -11,21 +11,9 @@ const MarkCard = dynamic(() => import('./Card'));
 const TrustSection = () => {
   const [open, setOpen] = useState(false);
   const [marks, setList] = useState([]);
-
-  const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/marks/') => ({
-    fetchAll: () => axios.get(url),
-  });
-
-  function refreshList() {
-    API().fetchAll()
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log(err));
-  }
-
+  const api = new Api('marks');
   useEffect(() => {
-    refreshList();
+    api.getAll().then((res) => { setList(res); });
   });
 
   return (

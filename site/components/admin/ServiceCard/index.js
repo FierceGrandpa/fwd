@@ -1,110 +1,52 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { useForm } from '../../../helpers/form';
 
 const defaultImageSrc = '/img/image_placeholder.png';
-
-const initialFieldValues = {
-  id: 0,
-  title: '',
-  offers: [],
-  alt: '',
-  width: '',
-  height: '',
-  imageName: '',
-  imageSrc: defaultImageSrc,
-  imageFile: null,
-};
 
 export default function ServiceCard({ addOrEdit, recordForEdit }) {
   const editorRef = useRef(null);
   const [initialValue, setInitialValue] = useState(undefined);
   const [offer, setOffer] = useState({ id: 0, name: '', price: '' });
-  const [values, setValues] = useState(initialFieldValues);
-  const [errors, setErrors] = useState({});
+  const {
+    reset, values, onChange,
+  } = useForm({
+    init: {
+      title: '',
+      description: '',
+      offers: [],
+      alt: '',
+      width: '',
+      height: '',
+      imageSrc: defaultImageSrc,
+    },
+    recordForEdit,
+  });
 
   useEffect(() => {
-    if (recordForEdit != null) {
-      setValues(recordForEdit);
-      setInitialValue(recordForEdit.description);
-    }
-  }, [recordForEdit]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
+    setInitialValue(values.description);
+  }, [values.description]);
 
   const handleOfferChange = (e) => {
     const { name, value } = e.target;
-    setOffer({
-      ...offer,
-      [name]: value,
-    });
+    setOffer({ ...offer, [name]: value });
   };
 
-  const showPreview = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setValues({
-          ...values,
-          imageFile,
-          imageSrc: x.target.result,
-        });
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      setValues({
-        ...values,
-        imageFile: null,
-        imageSrc: defaultImageSrc,
-      });
-    }
-  };
-
-  const validate = () => {
-    const temp = {};
-    // eslint-disable-next-line eqeqeq
-    temp.title = values.title !== '';
-    temp.alt = values.alt !== '';
-    temp.offers = values.offers !== [];
-    temp.width = values.width > 0;
-    temp.height = values.height > 0;
-    temp.imageSrc = values.imageSrc !== defaultImageSrc;
-    setErrors(temp);
-    return Object.values(temp).every((x) => x);
-  };
-
-  const resetForm = () => {
-    setValues(initialFieldValues);
-    document.getElementById('image-uploader').value = null;
-    setErrors({});
-  };
-
-  const handleFormSubmit = (e) => {
+  const onFormSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      const formData = new FormData();
-      formData.append('id', values.id);
-      formData.append('title', values.title);
-      if (editorRef.current) {
-        formData.append('description', editorRef.current.getContent());
-      }
-      formData.append('offers', JSON.stringify(values.offers));
-      formData.append('alt', values.alt);
-      formData.append('height', values.height);
-      formData.append('width', values.width);
-      formData.append('imageName', values.imageName);
-      formData.append('imageFile', values.imageFile);
-      addOrEdit(formData, resetForm);
-    }
+    addOrEdit({
+      id: values.id || '',
+      offers: values.offers,
+      alt: values.alt,
+      width: values.width,
+      height: values.height,
+      title: values.title,
+      description: editorRef.current.getContent(),
+      imageSrc: values.imageSrc,
+    }, reset);
   };
 
-  const handleOfferSubmit = () => {
+  const onOfferSubmit = () => {
     if (offer && offer.name && offer.name !== '' && offer.price && offer.price !== '' && offer.price > 0) {
       offer.id = values.offers.length;
       values.offers.push(offer);
@@ -112,29 +54,27 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
     }
   };
 
-  const applyErrorClass = (field) => ((field in errors && !errors[field]) ? ' invalid-field' : '');
-
   return (
     <>
-      <form autoComplete="off" className="fwd-form" noValidate onSubmit={handleFormSubmit}>
+      <form autoComplete="off" className="fwd-form" onSubmit={onFormSubmit}>
         <img src={values.imageSrc} className="fwd-form__img" />
         <div className="fwd-form__body">
           <div className="form-group">
             <input
-              type="file"
-              accept="image/*"
-              className={`form-control-file${applyErrorClass('imageSrc')}`}
-              onChange={showPreview}
-              id="image-uploader"
+              name="imageSrc"
+              placeholder="image link"
+              className="form-control"
+              value={values.imageSrc}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
             <input
-              className={`form-control${applyErrorClass('alt')}`}
+              className="form-control"
               placeholder="alt"
               name="alt"
               value={values.alt}
-              onChange={handleInputChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
@@ -143,7 +83,7 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
               placeholder="title"
               name="title"
               value={values.title}
-              onChange={handleInputChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
@@ -174,7 +114,7 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
               placeholder="height"
               name="height"
               value={values.height}
-              onChange={handleInputChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
@@ -183,7 +123,7 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
               placeholder="width"
               name="width"
               value={values.width}
-              onChange={handleInputChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
@@ -191,7 +131,7 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
             <h6 className="form-group__subtitle">Offers</h6>
             <ul className="form-list">
               {values.offers.map((e) => (
-                <li key={e.id}>
+                <li>
                   <div>
                     <span>
                       {e.name}
@@ -206,9 +146,11 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
                     type="button"
                     className="btn close"
                     onClick={() => {
-                      setValues({
-                        ...values,
-                        offers: values.offers.filter((u) => u.id != e.id),
+                      onChange({
+                        target: {
+                          name: 'offers',
+                          value: values.offers.filter((u) => u.name !== e.name),
+                        },
                       });
                     }}
                   >
@@ -237,7 +179,7 @@ export default function ServiceCard({ addOrEdit, recordForEdit }) {
                 />
               </div>
               <div className="form-group">
-                <button type="button" className="btn" onClick={handleOfferSubmit}>Добавить</button>
+                <button type="button" className="btn" onClick={onOfferSubmit}>Добавить</button>
               </div>
             </div>
             <div className="separator" />

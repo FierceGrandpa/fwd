@@ -1,76 +1,54 @@
+import { useEffect, useState } from 'react';
+
 import Layout from 'components/Layout';
 
 import { Container, Row } from 'components/UI';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import ArticleCard from 'components/admin/ArticleCard';
-import { site } from '../../data';
+
+import { Api } from 'helpers/Api';
+
+import { site } from 'data';
 
 export default function AdminArticlesPage() {
-  const [password, setPassword] = useState('');
-  const [list, setList] = useState([]);
-  const [record, setRecord] = useState(null);
-
   if (typeof window === 'undefined') {
     return 'loading...';
   }
 
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: localStorage.getItem('key'),
-  };
-  const config = {
-    headers,
-    crossDomain: true,
-  };
+  const [password, setPassword] = useState('');
+  const [list, setList] = useState([]);
+  const [record, setRecord] = useState(null);
 
-  const API = (url = 'https://u1487495.plsk.regruhosting.ru/api/articles/') => ({
-    fetchAll: () => axios.get(url),
-    create: (newRecord) => axios.post(url, newRecord, config),
-    update: (id, updatedRecord) => axios.put(url + id, updatedRecord, config),
-    delete: (id) => axios.delete(url + id, config),
-  });
+  const api = new Api('news');
 
   function refreshList() {
-    API().fetchAll()
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log(err));
+    api.getAll().then((res) => { setList(res); });
   }
 
   useEffect(() => {
     refreshList();
   });
 
-  const addOrEdit = (formData, onSuccess) => {
-    if (formData.get('id') === '0') {
-      API().create(formData)
+  const addOrEdit = (data, onSuccess) => {
+    if (data.id === '') {
+      api.create(data)
         .then(() => {
           onSuccess();
           refreshList();
-        })
-        .catch((err) => console.log(err));
+        });
     } else {
-      API().update(formData.get('id'), formData)
+      api.update(data.id, data)
         .then(() => {
           onSuccess();
           refreshList();
-        })
-        .catch((err) => console.log(err));
+        });
     }
-  };
-
-  const showRecordDetails = (data) => {
-    setRecord(data);
   };
 
   const onDelete = (e, id) => {
     e.stopPropagation();
     if (window.confirm('Вы действительно хотите удалить запись?')) {
-      API().delete(id)
-        .then(() => refreshList())
-        .catch((err) => console.log(err));
+      api.remove(id).then(() => refreshList());
     }
   };
 
@@ -79,7 +57,7 @@ export default function AdminArticlesPage() {
   }
 
   const imageCard = (data) => (
-    <div className="record-card" onClick={() => { showRecordDetails(data); }}>
+    <div className="record-card" onClick={() => setRecord(data)}>
       <div className="record-card__image-wrapper">
         <div>
           <img src={data.imageSrc} height={data.height} width={data.width} alt={data.alt || data.imageName} />
@@ -233,30 +211,6 @@ export default function AdminArticlesPage() {
     </div>
   );
 
-  if (localStorage.getItem('key') !== site.key) {
-    return (
-      <>
-        <Layout>
-          <section>
-            <Container>
-              <input
-                type="text"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
-            </Container>
-          </section>
-        </Layout>
-        <style jsx>
-          {`
-            section {
-              height: calc(100vh - 72px - 72px);
-            }
-          `}
-        </style>
-      </>
-    );
-  }
   return (
     <Layout>
       <section className="top-section">

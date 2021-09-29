@@ -9,12 +9,13 @@ import TopSection from 'components/sections/Top';
 import { NewsCard, Container, Row } from 'components/UI';
 import Pagination from 'components/UI/Pagination';
 import Modal from 'components/UI/Modal';
-import axios from "axios";
+import {Api} from "helpers/Api";
+const api = new Api('news');
 
-export default function ArticlesPage() {
+export default function ArticlesPage({ items }) {
   const pageLimit = 3;
 
-  const [articles, setList] = useState([]);
+  const [articles, setList] = useState(items || []);
   const router = useRouter();
   const { query, route, asPath } = router;
   const { page } = query;
@@ -41,15 +42,11 @@ export default function ArticlesPage() {
 
   const getCurrentItems = () => {
     const offset = (getStartIndex() - 1) * pageLimit;
-    return articles.sort((a, b) => new Date(b.date) - new Date(a.date))?.slice(offset, offset + pageLimit);
+    return articles.sort((a, b) => new Date(b.createAt) - new Date(a.createAt))?.slice(offset, offset + pageLimit);
   };
 
   useEffect(() => {
-    axios.get('https://u1487495.plsk.regruhosting.ru/api/articles/')
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log(err));
+    api.getAll().then((res) => { setList(res); });
   });
 
   return (
@@ -115,4 +112,14 @@ export default function ArticlesPage() {
       </style>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const items = await api.getAll();
+
+  return {
+    props: {
+      items,
+    },
+  }
 }

@@ -7,18 +7,15 @@ import dynamic from 'next/dynamic';
 
 import axios from 'axios';
 import styles from './styles.scss';
+import {Api} from "../../../helpers/Api";
 
 const ServiceCard = dynamic(() => import('./Card'));
 
 const ServicesSection = () => {
   const [services, setList] = useState([]);
-
+  const api = new Api('services');
   useEffect(() => {
-    axios.get('https://u1487495.plsk.regruhosting.ru/api/services/')
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log(err));
+    api.getAll().then((res) => { setList(res); });
   });
 
   return (

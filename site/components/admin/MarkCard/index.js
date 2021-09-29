@@ -1,108 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useForm } from '../../../helpers/form';
 
 const defaultImageSrc = '/img/image_placeholder.png';
 
-const initialFieldValues = {
-  id: 0,
-  alt: '',
-  width: '',
-  height: '',
-  imageName: '',
-  imageSrc: defaultImageSrc,
-  imageFile: null,
-};
-
 export default function MarkCard({ addOrEdit, recordForEdit }) {
-  const [values, setValues] = useState(initialFieldValues);
-  const [errors, setErrors] = useState({});
+  const {
+    reset, values, onChange,
+  } = useForm({
+    init: {
+      alt: '',
+      width: '',
+      height: '',
+      imageSrc: defaultImageSrc,
+    },
+    recordForEdit,
+  });
 
-  useEffect(() => {
-    if (recordForEdit != null) { setValues(recordForEdit); }
-  }, [recordForEdit]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
-
-  const showPreview = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setValues({
-          ...values,
-          imageFile,
-          imageSrc: x.target.result,
-        });
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      setValues({
-        ...values,
-        imageFile: null,
-        imageSrc: defaultImageSrc,
-      });
-    }
-  };
-
-  const validate = () => {
-    const temp = {};
-    // eslint-disable-next-line eqeqeq
-    temp.alt = values.alt !== '';
-    temp.window = values.window > 0;
-    temp.height = values.height > 0;
-    temp.imageSrc = values.imageSrc !== defaultImageSrc;
-    setErrors(temp);
-    return Object.values(temp).every((x) => x);
-  };
-
-  const resetForm = () => {
-    setValues(initialFieldValues);
-    document.getElementById('image-uploader').value = null;
-    setErrors({});
-  };
-
-  const handleFormSubmit = (e) => {
+  const onFormSubmit = (e) => {
     e.preventDefault();
-    if (!validate()) {
-      const formData = new FormData();
-      formData.append('id', values.id);
-      formData.append('alt', values.alt);
-      formData.append('height', values.height);
-      formData.append('width', values.width);
-      formData.append('imageName', values.imageName);
-      formData.append('imageFile', values.imageFile);
-      addOrEdit(formData, resetForm);
-    }
+    addOrEdit({
+      id: values.id || '',
+      alt: values.alt,
+      width: values.width,
+      height: values.height,
+      imageSrc: values.imageSrc,
+    }, reset);
   };
-
-  const applyErrorClass = (field) => ((field in errors && !errors[field]) ? ' invalid-field' : '');
 
   return (
     <>
-      <form autoComplete="off" className="fwd-form" noValidate onSubmit={handleFormSubmit}>
+      <form autoComplete="off" className="fwd-form" onSubmit={onFormSubmit}>
         <img src={values.imageSrc} className="fwd-form__img" />
         <div className="fwd-form__body">
           <div className="form-group">
             <input
-              type="file"
-              accept="image/*"
-              className={`form-control-file${applyErrorClass('imageSrc')}`}
-              onChange={showPreview}
-              id="image-uploader"
+              name="imageSrc"
+              placeholder="image link"
+              className="form-control"
+              value={values.imageSrc}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
             <input
-              className={`form-control${applyErrorClass('alt')}`}
+              className="form-control"
               placeholder="alt"
               name="alt"
               value={values.alt}
-              onChange={handleInputChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
@@ -111,7 +56,7 @@ export default function MarkCard({ addOrEdit, recordForEdit }) {
               placeholder="height"
               name="height"
               value={values.height}
-              onChange={handleInputChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">
@@ -120,7 +65,7 @@ export default function MarkCard({ addOrEdit, recordForEdit }) {
               placeholder="width"
               name="width"
               value={values.width}
-              onChange={handleInputChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-group">

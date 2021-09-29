@@ -2,19 +2,16 @@ import { Container, Row } from 'components/UI';
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { Api } from 'helpers/Api';
 import styles from './styles.scss';
 
 const NewsCard = dynamic(() => import('./Card'));
 
 const LastNewsSection = () => {
   const [articles, setList] = useState([]);
+  const api = new Api('news');
   useEffect(() => {
-    axios.get('https://u1487495.plsk.regruhosting.ru/api/articles/')
-      .then((res) => {
-        setList(res.data);
-      })
-      .catch((err) => console.log(err));
+    api.getAll().then((res) => { setList(res); });
   });
 
   return (
@@ -30,7 +27,7 @@ const LastNewsSection = () => {
           <Row>
             <div className="news-grid">
               {articles
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .sort((a, b) => new Date(b.createAt) - new Date(a.createAt))
                 .slice(0, 3)
                 .map((e) => (
                   <NewsCard key={e.id} news={e} />

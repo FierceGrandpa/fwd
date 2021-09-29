@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 
-import DateTimeHelper from 'helpers/DateTime';
+import { dateTime } from 'helpers/date-time';
 
 import { Button } from 'components/UI';
 
 import styles from './styles.scss';
 
-const NewsCard = ({ news, isOpen}) => {
+const NewsCard = ({ news, isOpen }) => {
   const [mounded, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-  })
+  });
   useEffect(() => {
     if (mounded) {
       setOpen(isOpen);
@@ -24,7 +24,7 @@ const NewsCard = ({ news, isOpen}) => {
       <div className="news-card">
         <div className="news-card__header" style={{ backgroundImage: `url(${news.imageSrc})` }}>
           <span className="news-card__time">
-            {DateTimeHelper.getFormattedDate(news.date)}
+            {dateTime.getFormattedDate(news.createAt)}
           </span>
           <h2 className="news-card__title">
             {(news.title)}

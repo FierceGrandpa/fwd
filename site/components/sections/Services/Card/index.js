@@ -1,4 +1,3 @@
-import Image from 'next/image';
 
 import styles from './styles.scss';
 
@@ -11,7 +10,7 @@ const ServiceCard = ({ service, href }) => {
     <>
       <a className="service-card" href={href} title={alt}>
         <div className="service-card__image-wrapper">
-          <Image className="service-card__image" src={imageSrc} height={height} width={width} alt={alt || title} />
+          <img className="service-card__image" src={imageSrc} height={height} width={width} alt={alt || title} />
         </div>
         <div className="service-card__text-wrapper">
           <h3 className="service-card__title">{title}</h3>

@@ -19,12 +19,12 @@ const newsApi = new Api('news');
 const servicesApi = new Api('services');
 const marksApi = new Api('marks');
 
-export default function HomePage({ articlesInit, servicesInit, marksInit }) {
+export default function HomePage() {
   const [modal, setModal] = useState(false);
 
-  const [articles, setArticles] = useState(articlesInit || []);
-  const [services, setServices] = useState(servicesInit || []);
-  const [marks, setMarks] = useState(marksInit || []);
+  const [articles, setArticles] = useState([]);
+  const [services, setServices] = useState([]);
+  const [marks, setMarks] = useState([]);
 
   useEffect(() => {
     newsApi.getAll().then((res) => { setArticles(res); });
@@ -71,17 +71,4 @@ export default function HomePage({ articlesInit, servicesInit, marksInit }) {
       </style>
     </Layout>
   );
-}
-export async function getServerSideProps() {
-  const articlesInit = await newsApi.getAll();
-  const servicesInit = await servicesApi.getAll();
-  const marksInit = await marksApi.getAll();
-
-  return {
-    props: {
-      articlesInit,
-      servicesInit,
-      marksInit,
-    },
-  };
 }

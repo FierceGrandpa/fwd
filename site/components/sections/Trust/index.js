@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Container, Row } from 'components/UI';
 
 import dynamic from 'next/dynamic';
+
+import { Api } from 'helpers/Api';
 import styles from './styles.scss';
 
 const MarkCard = dynamic(() => import('./Card'));
 
-const TrustSection = ({ marks = [] }) => {
+const TrustSection = () => {
   const [open, setOpen] = useState(false);
+  const [marks, setList] = useState([]);
+  const api = new Api('marks');
+  useEffect(() => {
+    api.getAll().then((res) => { setList(res); });
+  });
 
   return (
     <>

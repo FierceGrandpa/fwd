@@ -1,7 +1,7 @@
 const next = require('next');
 const express = require('express');
 const https = require('https');
-https.globalAgent.options.ca = require('ssl-root-cas/latest').create();
+https.globalAgent.options.ca = require('ssl-root-cas').create();
 const http = require('http');
 const fs = require('fs');
 const cors = require('cors');

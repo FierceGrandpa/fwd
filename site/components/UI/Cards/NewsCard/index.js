@@ -18,21 +18,27 @@ const NewsCard = ({ news, isOpen }) => {
       setOpen(isOpen);
     }
   }, [isOpen]);
-
+  const {
+    id, imageSrc, createAt, title, content,
+  } = news;
   return (
-    <div id={`article-${news.id}`} className="card-wrapper">
+    <div id={`article-${id}`} className="card-wrapper">
       <div className="news-card">
-        <div className="news-card__header" style={{ backgroundImage: `url(${news.imageSrc})` }}>
+        <div className="news-card__header" style={{ backgroundImage: `url(${imageSrc})` }}>
           <span className="news-card__time">
-            {dateTime.getFormattedDate(news.createAt)}
+            {dateTime.getFormattedDate(createAt)}
           </span>
           <h2 className="news-card__title">
-            {(news.title)}
+            {(title)}
           </h2>
         </div>
         <div className="news-card__content">
           <div className={`news-card__text${open ? ' opened' : ''}`}>
-            <p dangerouslySetInnerHTML={{ __html: news.content }} />
+            <p>
+              <div dangerouslySetInnerHTML={{
+                __html: content,
+              }} />
+            </p>
           </div>
           <Button caption={open ? 'Скрыть' : 'Подробнее'} onClick={() => setOpen(!open)} />
         </div>

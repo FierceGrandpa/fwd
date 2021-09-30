@@ -27,6 +27,13 @@ $card-width: calc((100% - 30px - 30px) / 3);
   padding: 30px 32px;
 
   border-radius: 17px;
+
+  &:first-child {
+    margin-right: 40px;
+  }
+  &:last-child {
+    margin-left: 40px;
+  }
 }
 
 .news-card__header {

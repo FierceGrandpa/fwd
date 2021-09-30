@@ -5,6 +5,7 @@
 @import "styles/styles";
 
 .pagination {
+  flex-wrap: wrap;
   @include flex-center;
 }
 

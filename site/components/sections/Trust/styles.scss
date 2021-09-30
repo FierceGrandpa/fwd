@@ -14,39 +14,26 @@ section {
 
 .trust-grid {
   display: grid;
-  width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  @media (max-width: 1300px) {
+    margin-bottom: -80px;
+  }
+  @media (max-width: 992px) {
+    margin-bottom: -160px;
+  }
   @media (max-width: 767px) {
+    margin-bottom: -40px;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  @media (max-width: 560px) {
+    margin-bottom: -80px;
+  }
+  @media (max-width: 420px) {
+    margin-bottom: -160px;
+  }
+  @media (max-width: 280px) {
+    margin-bottom: -380px;
   }
   transition: all 0.3s ease;
   grid-gap: 40px;
-  align-items: stretch;
-  margin-bottom: -200px;
-  @media (max-width: 1300px) {
-    margin-bottom: -300px;
-  }
-  @media (max-width: 992px) {
-    margin-bottom: -550px;
-  }
-  @media (max-width: 767px) {
-    margin-bottom: -200px;
-  }
-  @media (max-width: 576px) {
-    margin-bottom: -300px;
-  }
-  @media (max-width: 430px) {
-    margin-bottom: -550px;
-  }
-  @media (max-width: 280px) {
-    margin-bottom: -1050px;
-
-  }
-
-  &.open {
-    margin-bottom: 70px;
-    @include _1920 {
-      margin-bottom: 50px;
-    }
-  }
 }

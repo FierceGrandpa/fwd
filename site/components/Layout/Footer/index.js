@@ -64,7 +64,7 @@ const Footer = ({ signUp }) => (
             <small className="developer-info">
               Сайт создан
               <br />
-              <span> andstudio.ru & lu.perfect </span>
+              <span> andstudio.ru & <a style={{ color: '#fff' }} href="https://vk.com/lu.perfect" target="_blank" rel="noreferrer">lu.perfect</a> </span>
             </small>
           </div>
         </Row>

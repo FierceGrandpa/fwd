@@ -22,8 +22,6 @@ $card-width: calc((100% - 30px - 30px) / 3);
 
   overflow: hidden;
 
-  background-color: white;
-
   padding: 30px 32px;
 
   border-radius: 17px;
@@ -34,6 +32,17 @@ $card-width: calc((100% - 30px - 30px) / 3);
   &:last-child {
     margin-left: 40px;
   }
+  @media (max-width: 1300px) {
+    margin-bottom: 40px;
+    &:first-child {
+      margin-right: 0;
+    }
+    &:last-child {
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+  }
+
 }
 
 .news-card__header {

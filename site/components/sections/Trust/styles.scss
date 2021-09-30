@@ -26,16 +26,13 @@ section {
     margin-bottom: -160px;
   }
   @media (max-width: 767px) {
-    margin-bottom: -40px;
-  }
-  @media (max-width: 560px) {
     margin-bottom: -80px;
   }
-  @media (max-width: 420px) {
+  @media (max-width: 570px) {
     margin-bottom: -160px;
   }
-  @media (max-width: 280px) {
-    margin-bottom: -380px;
+  @media (max-width: 380px) {
+    margin-bottom: -360px;
   }
   transition: all 0.3s ease;
   grid-gap: 40px;

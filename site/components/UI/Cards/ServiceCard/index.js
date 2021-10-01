@@ -28,7 +28,7 @@ const ServiceCard = ({ service, signUp, isOpen }) => {
           </h2>
         </div>
         <div className="service-card__content">
-          <p className="service-card__description" dangerouslySetInnerHTML={{ __html: description }} />
+          <div className="service-card__description" dangerouslySetInnerHTML={{ __html: description }} />
           <ul className={`service-card__items-list${open ? ' service-card__items-list--opened' : ''}`}>
             {offers.map((item) => (
               <li className="service-card__item" key={item.id}>

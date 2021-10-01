@@ -13,27 +13,13 @@ section {
 }
 
 .trust-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
 
   &.open {
     margin-bottom: 0 !important;
   }
-  @media (max-width: 1300px) {
-    margin-bottom: -80px;
-  }
-  @media (max-width: 992px) {
-    margin-bottom: -160px;
-  }
-  @media (max-width: 767px) {
-    margin-bottom: -80px;
-  }
-  @media (max-width: 570px) {
-    margin-bottom: -160px;
-  }
-  @media (max-width: 380px) {
-    margin-bottom: -360px;
-  }
   transition: all 0.3s ease;
-  grid-gap: 40px;
 }

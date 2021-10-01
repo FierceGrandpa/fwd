@@ -35,8 +35,8 @@ const TrustSection = () => {
           </Row>
           <Row>
             <div style={{
-              transform: 'margin-top 0.2s easy',
-              marginTop: open ? '50px' : 0,
+              transform: 'all 0.3s ease-in-out',
+              marginTop: open ? '40px' : 0,
             }}>
               <Button caption={open ? 'Скрыть' : 'Показать все'} onClick={() => setOpen(!open)} />
             </div>
